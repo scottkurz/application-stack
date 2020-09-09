@@ -1,5 +1,5 @@
 # Step 1: Build the user's application
-FROM ajymau/java-openliberty-odo:0.1 as compile
+FROM ajymau/java-openliberty-odo:0.1.3 as compile
 
 # Make a well known place for shared library jars seperate from the rest of the defaultServer contents (to help with caching)
 RUN mkdir /configlibdir \
@@ -29,7 +29,7 @@ RUN cd /project/user-app/target/liberty/wlp/usr/servers && \
     if [ -d ../shared ]; then mv ../shared/* /shared/; fi
 
 # Step 2: Package Open Liberty image
-FROM openliberty/open-liberty:kernel-java8-openj9-ubi
+FROM openliberty/open-liberty:20.0.0.9-kernel-java11-openj9-ubi
 
 #2a) copy any resources 
 COPY --from=compile /shared /opt/ol/wlp/usr/shared/
