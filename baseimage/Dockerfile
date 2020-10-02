@@ -34,7 +34,8 @@ ADD ./starterapp/src /stacks/java-openliberty/starterapp/src
 COPY ./starterapp/pom.xml /stacks/java-openliberty/starterapp/
 
 WORKDIR /stacks/java-openliberty/starterapp
-RUN mvn -DserverName=tmp -Dmaven.repo.local=/mvn/repository -Dliberty.runtime.version=20.0.0.9 liberty:create liberty:install-feature install
+#RUN mvn -DserverName=tmp -Dmaven.repo.local=/mvn/repository -Dliberty.runtime.version=20.0.0.9 liberty:create liberty:install-feature install
+RUN nohup bash -c "mvn -DserverName=tmp -Dmaven.repo.local=/mvn/repository -Dliberty.runtime.version=20.0.0.9 liberty:dev &" && sleep 30 
 RUN rm -rf ./target/liberty/wlp/usr/servers/tmp
 
 FROM maven
