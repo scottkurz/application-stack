@@ -1,10 +1,13 @@
 # Step 1: Build the user's application
 FROM openliberty/application-stack:0.3 as compile
 
+ENV PROJECTS_ROOT=/projects
+
 # Make a well known place for shared library jars separate from the rest of the <server> contents (to help with caching)
 RUN mkdir /work/configlibdir \
    && mkdir /work/config \
-   &&  mkdir /work/shared
+   &&  mkdir /work/shared \
+   &&  ln -s /work/outer-loop-app $PROJECTS_ROOT
 
 # Copy the rest of the application source
 COPY --chown=1001:0 ./src /work/outer-loop-app/src
