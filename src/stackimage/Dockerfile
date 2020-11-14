@@ -44,7 +44,7 @@ COPY --chown=1001:0 ./priming-app/pom.xml /stacks/java-openliberty/priming-app/
 
 WORKDIR /stacks/java-openliberty/priming-app
 
-ARG LIBERTY_RUNTIME_VERSION={{.OL_DRIVER_VERSION}}
+ARG LIBERTY_RUNTIME_VERSION={{.OL_RUNTIME_VERSION}}
 
 RUN umask -S u=rwx,g=rwx,o=rx; mvn -B -e -DserverName=tmp -Dmaven.repo.local=/mvn/repository -Dliberty.runtime.version=${LIBERTY_RUNTIME_VERSION} -DskipITs=true install
 
